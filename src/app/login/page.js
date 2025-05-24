@@ -19,7 +19,7 @@ export default function LoginPage() {
   }, []);
 
   const handleLogin = () => {
-    if (email === "porteiro@email.com" && senha === "123456") {
+    if (email === "porteiro1" && senha === "123456") {
       localStorage.setItem("auth", "true");
       router.push("/entry");
     } else {
@@ -47,10 +47,9 @@ export default function LoginPage() {
 
           <div className="space-y-4">
             <div className="space-y-1">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="login">Login</Label>
               <Input
-                id="email"
-                type="email"
+                id="login"
                 placeholder="porteiro@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}

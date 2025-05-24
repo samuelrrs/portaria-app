@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { ModalNovaPessoa } from "@/components/ModalNovaPessoa/ModalNovaPessoa";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -10,15 +12,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { ModalNovaPessoa } from "@/components/ModalNovaPessoa/ModalNovaPessoa";
 import { salvarEntrada } from "@/utils/entryStorage";
-import { useRouter } from "next/navigation";
 import { buscarPessoasPorNomeOuDocumento } from "@/utils/pessoaStorage";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 import Link from "next/link";
-import BackgroundWrapper from "@/components/BackgroundWrapper/BackgroundWrapper";
 
 export default function EntryPage() {
   const [pessoa, setPessoa] = useState(null);
@@ -58,10 +57,9 @@ export default function EntryPage() {
   };
 
   return (
-    <main className="min-h-screen bg-transparent py-10 px-4">
+    <main className="min-h-screen bg-transparent py-10 ">
       <div className="max-w-2xl mx-auto bg-background-panel shadow-xl rounded-2xl p-6 md:p-10 space-y-6">
-        {/* TOPO */}
-        <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center flex-col md:flex-row justify-between mb-2">
           <h1 className="text-2xl md:text-3xl font-bold text-primary">
             📥 Registro de Entrada
           </h1>
@@ -75,12 +73,13 @@ export default function EntryPage() {
         {/* BUSCAR + CADASTRAR */}
         <div className="space-y-2">
           <Label className="text-text-base">Buscar Pessoa</Label>
-          <div className="flex flex-col md:flex-row gap-2 items-end relative">
-            <div className="flex-1">
+          <div className="flex flex-col md:flex-row md:items-end gap-2 w-full relative">
+            {/* Input ocupa toda a largura sempre */}
+            <div className="w-full md:flex-1">
               <Input
                 placeholder="Digite nome ou documento"
                 onChange={(e) => handleBuscarPessoa(e.target.value)}
-                className="bg-background-soft border border-primary-light focus:ring-2 focus:ring-primary"
+                className="w-full bg-background-soft border border-primary-light focus:ring-2 focus:ring-primary"
               />
               {sugestoes.length > 0 && (
                 <div className="absolute z-10 top-full left-0 w-full bg-white border border-gray-200 rounded shadow-md mt-1 max-h-60 overflow-y-auto">
@@ -99,7 +98,11 @@ export default function EntryPage() {
                 </div>
               )}
             </div>
-            <ModalNovaPessoa onPessoaCadastrada={(nova) => setPessoa(nova)} />
+
+            {/* Botão ocupa 100% no mobile, shrinka no desktop */}
+            <div className="w-full md:w-auto">
+              <ModalNovaPessoa onPessoaCadastrada={(nova) => setPessoa(nova)} />
+            </div>
           </div>
         </div>
 

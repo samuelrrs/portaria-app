@@ -68,16 +68,16 @@ export default function EntriesPage() {
         </Tabs>
 
         {/* Lista de registros */}
-        <div className="space-y-4">
+        <div className="space-y-4 flex flex-col items-center">
           {registrosFiltrados.length === 0 ? (
-            <p className="text-center text-text-subtle">
+            <p className="text-center text-text-subtle w-fit bg-white p-4 rounded-lg shadow-sm">
               Nenhum registro encontrado.
             </p>
           ) : (
             registrosFiltrados.map((registro) => (
               <div
                 key={registro.id}
-                className="bg-white border border-primary-light rounded-xl p-4 shadow-sm space-y-1"
+                className="bg-white border border-primary-light rounded-xl p-4 shadow-sm space-y-1 w-full"
               >
                 <div className="flex justify-between">
                   <p className="text-text-base font-semibold">
