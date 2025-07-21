@@ -44,6 +44,7 @@ export function ModalNovaPessoa({ onPessoaCadastrada }) {
 
     if ((veiculo === "CARRO" || veiculo === "MOTO") && !placa) {
       alert("Placa é obrigatória para carro ou moto");
+      return;
     }
 
     const novaPessoa = {
