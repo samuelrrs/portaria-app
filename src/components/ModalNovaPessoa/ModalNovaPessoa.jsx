@@ -23,7 +23,7 @@ import {
 import { salvarPessoa } from "@/utils/pessoaStorage";
 
 export function ModalNovaPessoa({ onPessoaCadastrada }) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [nome, setNome] = useState("");
   const [documento, setDocumento] = useState("");
   const [telefone, setTelefone] = useState("");
