@@ -29,11 +29,21 @@ export function ModalNovaPessoa({ onPessoaCadastrada }) {
   const [telefone, setTelefone] = useState("");
   const [tipo, setTipo] = useState("");
 
+  //Veiculo
+  const [veiculo, setVeiculo] = useState("");
+  const [placa, setPlaca] = useState("");
+
   const tiposPessoa = ["VISITANTE", "PRESTADOR", "ENTREGADOR"];
+  const tiposVeiculo = ["CARRO", "MOTO", "NENHUM"];
 
   const handleSalvar = () => {
     if (!nome || !documento || !tipo) {
       alert("Preencha os campos obrigatórios.");
+      return;
+    }
+
+    if ((veiculo === "CARRO" || veiculo === "MOTO") && !placa) {
+      alert("Placa é obrigatória para carro ou moto");
       return;
     }
 
@@ -43,7 +53,10 @@ export function ModalNovaPessoa({ onPessoaCadastrada }) {
       documento,
       telefone,
       tipo,
+      veiculo,
+      placa: placa || null,
     };
+
     salvarPessoa(novaPessoa);
     onPessoaCadastrada(novaPessoa);
     setOpen(false);
@@ -89,6 +102,32 @@ export function ModalNovaPessoa({ onPessoaCadastrada }) {
               onChange={(e) => setTelefone(e.target.value)}
             />
           </div>
+          <div className="grid gap-1">
+            <Label>Veículo</Label>
+            <Select onValueChange={setVeiculo}>
+              <SelectTrigger className="bg-background-soft border-primary-light">
+                <SelectValue placeholder="Selecione o tipo de veículo" />
+              </SelectTrigger>
+              <SelectContent>
+                {tiposVeiculo.map((v) => (
+                  <SelectItem key={v} value={v}>
+                    {v}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          {(veiculo === "CARRO" || veiculo === "MOTO") && (
+            <div className="grid gap-1">
+              <Label>Placa*</Label>
+              <Input
+                value={placa}
+                onChange={(e) => setPlaca(e.target.value.toUpperCase())}
+              />
+            </div>
+          )}
+
           <div className="grid gap-1">
             <Label>Tipo*</Label>
             <Select onValueChange={setTipo}>
