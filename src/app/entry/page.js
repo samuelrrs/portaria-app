@@ -118,6 +118,14 @@ export default function EntryPage() {
             <p className="text-text-base">
               <strong>Tipo:</strong> {pessoa.tipo}
             </p>
+
+            <p className="text-text-base">
+              <strong>Veículo:</strong> {pessoa.veiculo}
+            </p>
+
+            <p className="text-text-base">
+              <strong>Placa:</strong> {pessoa.placa}
+            </p>
           </div>
         )}
 

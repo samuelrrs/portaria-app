@@ -29,8 +29,16 @@ export default function EntriesPage() {
     const fim = new Date(saida);
     const diffMs = fim - inicio;
     const min = Math.floor(diffMs / 60000);
+
+    const dias = Math.floor(min / 1440);
+    const horas = Math.floor((min % 1440) / 60);
     const h = Math.floor(min / 60);
     const m = min % 60;
+
+    if (dias >= 1) {
+      return `${dias}d ${horas}h ${m}min`;
+    }
+
     return `${h > 0 ? `${h}h ` : ""}${m}min`;
   };
 
@@ -77,7 +85,7 @@ export default function EntriesPage() {
             registrosFiltrados.map((registro) => (
               <div
                 key={registro.id}
-                className="bg-white border border-primary-light rounded-xl p-4 shadow-sm space-y-1 w-full"
+                className="bg-white border border-primary-light rounded-xl p-4 shadow-sm space-y-1 w-full flex flex-col gap-1"
               >
                 <div className="flex justify-between">
                   <p className="text-text-base font-semibold">
@@ -94,6 +102,16 @@ export default function EntriesPage() {
                 <p className="text-sm">
                   Casa destino: <strong>{registro.casaId}</strong>
                 </p>
+
+                <div className="flex  gap-2">
+                  <p className="text-sm">
+                    Veículo: <strong>{registro.pessoa.veiculo}</strong>
+                  </p>
+
+                  <p className="text-sm">
+                    Placa: <strong>{registro.pessoa.placa}</strong>
+                  </p>
+                </div>
                 <p className="text-sm">Motivo: {registro.motivo}</p>
                 {registro.observacoes && (
                   <p className="text-sm italic text-text-subtle">
